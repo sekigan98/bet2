@@ -1,0 +1,251 @@
+/* Fondo violeta con overlay */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(to bottom, #240046, #5a189a);
+  color: white;
+  overflow: hidden;
+  min-height: 100dvh;
+  height: calc(var(--vh, 1vh) * 100);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Fondo con imagen suave */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("casino-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  opacity: 0.2;
+  z-index: -2;
+}
+
+/* Chicas decorativas */
+.girl {
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeIn 3s ease forwards;
+}
+
+.girl-left {
+  left: 0;
+}
+
+.girl-right {
+  right: 0;
+}
+
+.girl img {
+  max-height: 90vh; /* Reducir altura máxima en pantallas grandes y más aún en móviles */
+}
+
+/* Contenedor central */
+.container {
+  position: absolute;
+  top: 20%; /* Ajustar para que esté más arriba en dispositivos móviles */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 0 20px #000;
+  max-width: 80%;
+}
+
+/* Logo */
+.logo {
+  width: 100%;
+  max-width: 580px; /* Tamaño más pequeño para el logo en móviles */
+  margin-bottom: 0px; /* Reduce el espacio abajo del logo */
+}
+
+/* Título */
+h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+/* Lema */
+.tagline {
+  font-size: 1.5rem; /* Aumenté un poco el tamaño del lema */
+  margin-bottom: 20px;
+}
+
+/* Botón de WhatsApp */
+.whatsapp-button {
+  display: inline-block;
+  background-color: #25D366;
+  color: rgb(0, 0, 0);
+  padding: 15px 34px;
+  text-decoration: none;
+  font-size: 1.5rem; /* Aumenté el tamaño del texto */
+  border-radius: 30px;
+  box-shadow: 0 0 10px #25D366;
+  transition: background-color 0.3s;
+  margin-bottom: 10px; /* Espaciado más pequeño entre el botón y el siguiente contenido */
+}
+
+.whatsapp-button:hover {
+  background-color: #1ebe5b;
+}
+
+/* Footer */
+footer {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8rem;
+  z-index: 2;
+}
+
+footer a {
+  color: #ccc;
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: white;
+}
+
+/* Contenedor de fichas */
+.chips-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Estilo visual de la ficha */
+.chip {
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid white;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 4px currentColor, /* borde del color */
+    inset 0 0 0 6px white,        /* borde blanco interior */
+    inset 0 0 0 9px currentColor; /* otro anillo de color */
+  animation: fall linear forwards, spin 3s infinite linear;
+  opacity: 0.95;
+  z-index: 0;
+  transform-style: preserve-3d;
+}
+
+/* Animación de caída */
+@keyframes fall {
+  0% {
+    transform: translateY(-60px) rotateX(0deg) rotateY(0deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(110vh) rotateX(1080deg) rotateY(720deg);
+    opacity: 0;
+  }
+}
+
+/* Animación de rotación 3D */
+
+/* Fade-in */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Banner inferior fino */
+.bottom-banner {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background: radial-gradient(circle at center, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.95) 0%);
+  box-shadow: 0 -10px 20px rgba(255, 215, 0, 0.25); /* Brillo dorado muy suave */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  backdrop-filter: blur(4px); /* Efecto sutil de terciopelo/luz dispersa */
+  border-top: 1px solid rgba(255, 215, 0, 0.2); /* Línea dorada muy discreta arriba */
+}
+
+.light-glow {
+  width: 80%;
+  height: 8px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+  border-radius: 50%;
+  filter: blur(8px);
+  animation: pulse 3s infinite alternate;
+}
+
+/* Animación de pulso suave */
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+    transform: scaleX(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1.1);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 580px) {
+  .logo {
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.9rem; /* Aumento aún más el tamaño del título */
+  }
+  
+  .tagline {
+    font-size: 1.1rem; /* Aumento aún más el tamaño del lema */
+  }
+
+  .whatsapp-button {
+    font-size: 1rem; /* Aumento el tamaño del botón */
+    padding: 15px 24px;
+  }
+  
+  .girl img {
+    max-height: 55vh; /* Aún más pequeño en pantallas muy pequeñas */
+  }
+  
+  .container {
+    max-width: 110%;
+    padding: 1rem;
+    top: 3%; /* Mover más arriba el contenedor */
+  }
+  /* Footer */
+footer {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  z-index: 2;
+}
+}
