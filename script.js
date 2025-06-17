@@ -48,19 +48,35 @@ setInterval(createChip, 250);
 // 📱 Lógica de WhatsApp + GA
 document.addEventListener("DOMContentLoaded", () => {
   const whatsappButton = document.getElementById("whatsapp-button");
+  const whatsappLogo = document.getElementById("whatsapp-logo");
 
   const links = [
-     // "https://wa.link/ddrw6q", // 011-6963-9808
-      "https://wa.link/o3sylq", // 011-6964-0041
+    // "https://wa.link/ddrw6q", // 011-6963-9808
+    "https://wa.link/o3sylq",   // 011-6964-0041
   ];
 
   const randomIndex = Math.floor(Math.random() * links.length);
-  whatsappButton.href = links[randomIndex];
+  const selectedLink = links[randomIndex];
 
-  whatsappButton.addEventListener("click", () => {
-    gtag('event', 'click_whatsapp', {
-      event_category: 'engagement',
-      event_label: 'Botón WhatsApp',
+  // Botón
+  if (whatsappButton) {
+    whatsappButton.href = selectedLink;
+    whatsappButton.addEventListener("click", () => {
+      gtag('event', 'click_whatsapp', {
+        event_category: 'engagement',
+        event_label: 'Botón WhatsApp',
+      });
     });
-  });
+  }
+
+  // Logo clickeable
+  if (whatsappLogo) {
+    whatsappLogo.href = selectedLink;
+    whatsappLogo.addEventListener("click", () => {
+      gtag('event', 'click_whatsapp_logo', {
+        event_category: 'engagement',
+        event_label: 'Logo WhatsApp',
+      });
+    });
+  }
 });
