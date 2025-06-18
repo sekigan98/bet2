@@ -7,14 +7,10 @@ window.addEventListener('resize', setVhUnit);
 
 // 🎯 Chips animadas
 const chipsContainer = document.querySelector(".chips-container");
+
 const colors = ['#D32F2F', '#9C27B0', '#FFD700', '#030001']; // rojo, violeta, dorado
 
-let activeChips = 0;
-const maxChips = 15; // Máximo de fichas activas al mismo tiempo
-
 function createChip() {
-  if (activeChips >= maxChips) return;
-
   const chip = document.createElement("div");
   chip.classList.add("chip");
 
@@ -29,8 +25,8 @@ function createChip() {
   const size = 30 + Math.random() * 20;
   chip.style.width = chip.style.height = size + "px";
 
-  // Duración de la caída (más corta para no saturar)
-  const duration = 2 + Math.random() * 2;
+  // Duración de la caída
+  const duration = 3 + Math.random() * 3;
   chip.style.animationDuration = `${duration}s, 3s`;
 
   // Rotaciones iniciales aleatorias
@@ -39,17 +35,15 @@ function createChip() {
   chip.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
 
   chipsContainer.appendChild(chip);
-  activeChips++;
 
-  // Eliminar después de la animación y restar contador
+  // Eliminar después de la animación
   setTimeout(() => {
     chip.remove();
-    activeChips--;
-  }, duration * 1000 + 500);
+  }, duration * 1000 + 1000);
 }
 
-// Lanzar una ficha cada 400ms
-setInterval(createChip, 400);
+// Lanzar una ficha cada 250ms
+setInterval(createChip, 250);
 
 // 📱 Lógica de WhatsApp + GA
 document.addEventListener("DOMContentLoaded", () => {
@@ -86,4 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  // ✅ Fix Safari: forzar repintado para animaciones y capas 3D
+  document.body.style.transform = 'translateZ(0)';
 });
