@@ -7,7 +7,7 @@ window.addEventListener('resize', setVhUnit);
 
 // 🎯 Chips animadas optimizadas para iOS
 const chipsContainer = document.querySelector(".chips-container");
-const colors = ['#D32F2F', '#9C27B0', '#FFD700', '#030001']; // rojo, violeta, dorado
+const colors = ['#D32F2F', '#9C27B0', '#FFD700', '#030001'];
 
 let chipCount = 0;
 const maxChips = 30;
@@ -19,22 +19,22 @@ function createChip() {
   chip.classList.add("chip");
   chipCount++;
 
-  // Color aleatorio
   const color = colors[Math.floor(Math.random() * colors.length)];
   chip.style.color = color;
 
-  // Posición X aleatoria con translateX
   const x = Math.random() * window.innerWidth;
   const size = 30 + Math.random() * 20;
   const duration = 3 + Math.random() * 3;
+  const rotX = Math.floor(Math.random() * 360);
+  const rotY = Math.floor(Math.random() * 360);
 
   chip.style.width = chip.style.height = size + "px";
-  chip.style.transform = `translateX(${x}px) rotateX(${Math.random() * 360}deg) rotateY(${Math.random() * 360}deg)`;
-  chip.style.animationDuration = `${duration}s`;
+  chip.style.left = x + "px";
+  chip.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-100px)`; // arranca más arriba
+  chip.style.animation = `fall ${duration}s linear forwards`;
 
   chipsContainer.appendChild(chip);
 
-  // Eliminar luego de la animación
   setTimeout(() => {
     chip.remove();
     chipCount--;
