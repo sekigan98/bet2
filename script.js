@@ -43,7 +43,7 @@ function createChip() {
 }
 
 // Lanzar una ficha cada 250ms
-setInterval(createChip, 450);
+setInterval(createChip, 1550);
 
 // 📱 Lógica de WhatsApp + GA
 document.addEventListener("DOMContentLoaded", () => {
