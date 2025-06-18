@@ -52,7 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const links = [
     // "https://wa.link/ddrw6q", // 011-6963-9808
-    "https://wa.link/o3sylq",   // 011-6964-0041
+    "https://wa.link/o3sylq", // 011-6964-0041
+    // "https://wa.link/wvjsvu" // 011-3018-4335
   ];
 
   const randomIndex = Math.floor(Math.random() * links.length);
@@ -79,4 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  // ✅ Fix Safari: forzar repintado para animaciones y capas 3D
+  document.body.style.transform = 'translateZ(0)';
 });
