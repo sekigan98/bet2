@@ -5,6 +5,7 @@ body {
   font-family: "Segoe UI", sans-serif;
   background: linear-gradient(to bottom, #240046, #5a189a);
   color: white;
+  overflow: hidden;
   min-height: 100dvh;
   height: calc(var(--vh, 1vh) * 100);
   overflow-x: hidden;
@@ -21,16 +22,50 @@ body {
   background-image: url("casino-bg.jpg");
   background-size: cover;
   background-position: center;
+  will-change: transform, opacity;
   backface-visibility: hidden;
+  transform-style: preserve-3d;
   opacity: 0.2;
   z-index: -2;
+}
+
+/* Contenedor de fichas — se reubica al fondo */
+.chips-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0; /* Detrás del contenido */
+  overflow: hidden;
+}
+
+/* Estilo visual de la ficha */
+.chip {
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid white;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 4px currentColor,
+    inset 0 0 0 6px white,
+    inset 0 0 0 9px currentColor;
+  animation: fall linear forwards, spin 3s infinite linear;
+  opacity: 0.95;
+  z-index: 0;
 }
 
 /* Chicas decorativas */
 .girl {
   position: fixed;
   bottom: 0;
-  z-index: 1;
+  z-index: 2;
   opacity: 0;
   animation: fadeIn 3s ease forwards;
 }
@@ -49,12 +84,12 @@ body {
 
 /* Contenedor central */
 .container {
-  position: absolute;
+  position: relative;
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  z-index: 2;
+  z-index: 3; /* Asegura estar por encima de las fichas */
   background: rgba(0, 0, 0, 0.4);
   padding: 2rem;
   border-radius: 16px;
@@ -67,12 +102,14 @@ body {
   width: 100%;
   max-width: 580px;
   margin-bottom: 0px;
+  z-index: 3;
 }
 
 /* Título */
 h1 {
   font-size: 3rem;
   margin-bottom: 10px;
+  z-index: 3;
 }
 
 /* Lema */
@@ -93,6 +130,7 @@ h1 {
   box-shadow: 0 0 10px #25D366;
   transition: background-color 0.3s;
   margin-bottom: 10px;
+  z-index: 3;
 }
 
 .whatsapp-button:hover {
@@ -101,12 +139,12 @@ h1 {
 
 /* Footer */
 footer {
-  position: fixed;
+  position: absolute;
   bottom: 15px;
   width: 100%;
   text-align: center;
   font-size: 0.8rem;
-  z-index: 2;
+  z-index: 3;
 }
 
 footer a {
@@ -118,33 +156,29 @@ footer a:hover {
   color: white;
 }
 
-/* Contenedor de fichas */
-.chips-container {
+/* Banner inferior fino */
+.bottom-banner {
   position: fixed;
-  top: 0;
-  left: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden; /* ✅ importante para Safari */
+  height: 60px;
+  background: radial-gradient(circle at center, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.95) 0%);
+  box-shadow: 0 -10px 20px rgba(255, 215, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+  border-top: 1px solid rgba(255, 215, 0, 0.2);
 }
 
-/* Estilo visual de la ficha */
-.chip {
-  position: absolute;
-  width: 40px;
-  height: 40px;
+.light-glow {
+  width: 80%;
+  height: 8px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
   border-radius: 50%;
-  background: white;
-  border: 3px solid white;
-  box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.4),
-    inset 0 0 0 4px currentColor,
-    inset 0 0 0 6px white,
-    inset 0 0 0 9px currentColor;
-  animation: fall 5s linear forwards, spin 3s infinite linear;
-  opacity: 0.95;
+  filter: blur(8px);
+  animation: pulse 3s infinite alternate;
 }
 
 /* Animación de caída */
@@ -159,12 +193,6 @@ footer a:hover {
   }
 }
 
-/* Animación de rotación (agregada por si falta) */
-@keyframes spin {
-  0% { transform: rotateX(0deg) rotateY(0deg); }
-  100% { transform: rotateX(1080deg) rotateY(720deg); }
-}
-
 /* Fade-in */
 @keyframes fadeIn {
   to {
@@ -172,32 +200,7 @@ footer a:hover {
   }
 }
 
-/* Banner inferior fino */
-.bottom-banner {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 60px;
-  background: radial-gradient(circle at center, rgba(20, 20, 20, 0.9) 0%, rgba(10, 10, 10, 0.95) 0%);
-  box-shadow: 0 -10px 20px rgba(255, 215, 0, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  backdrop-filter: blur(4px);
-  border-top: 1px solid rgba(255, 215, 0, 0.2);
-}
-
-.light-glow {
-  width: 80%;
-  height: 8px;
-  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
-  border-radius: 50%;
-  filter: blur(8px);
-  animation: pulse 3s infinite alternate;
-}
-
-/* Pulso suave */
+/* Animación de pulso suave */
 @keyframes pulse {
   0% {
     opacity: 0.5;
@@ -239,7 +242,11 @@ footer a:hover {
   }
 
   footer {
-    font-size: 0.9rem;
+    position: fixed;
     bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    z-index: 3;
   }
 }
