@@ -5,46 +5,43 @@ function setVhUnit() {
 setVhUnit();
 window.addEventListener('resize', setVhUnit);
 
-// 🎯 Chips animadas
+// 🎯 Chips animadas optimizadas para iOS
 const chipsContainer = document.querySelector(".chips-container");
-
 const colors = ['#D32F2F', '#9C27B0', '#FFD700', '#030001']; // rojo, violeta, dorado
 
+let chipCount = 0;
+const maxChips = 30;
+
 function createChip() {
+  if (chipCount >= maxChips) return;
+
   const chip = document.createElement("div");
   chip.classList.add("chip");
+  chipCount++;
 
   // Color aleatorio
   const color = colors[Math.floor(Math.random() * colors.length)];
   chip.style.color = color;
 
-  // Posición aleatoria
-  chip.style.left = Math.random() * 100 + "vw";
-
-  // Tamaño aleatorio
+  // Posición X aleatoria con translateX
+  const x = Math.random() * window.innerWidth;
   const size = 30 + Math.random() * 20;
-  chip.style.width = chip.style.height = size + "px";
-
-  // Duración de la caída
   const duration = 3 + Math.random() * 3;
-  chip.style.animationDuration = `${duration}s, 3s`;
 
-  // Rotaciones iniciales aleatorias
-  const rotX = Math.floor(Math.random() * 360);
-  const rotY = Math.floor(Math.random() * 360);
-  chip.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  chip.style.width = chip.style.height = size + "px";
+  chip.style.transform = `translateX(${x}px) rotateX(${Math.random() * 360}deg) rotateY(${Math.random() * 360}deg)`;
+  chip.style.animationDuration = `${duration}s`;
 
   chipsContainer.appendChild(chip);
 
-  // Eliminar después de la animación
+  // Eliminar luego de la animación
   setTimeout(() => {
     chip.remove();
+    chipCount--;
   }, duration * 1000 + 1000);
 }
 
-// Lanzar una ficha cada 250ms
-setInterval(createChip, 250);
-
+setInterval(createChip, 400);
 // 📱 Lógica de WhatsApp + GA
 document.addEventListener("DOMContentLoaded", () => {
   const whatsappButton = document.getElementById("whatsapp-button");
