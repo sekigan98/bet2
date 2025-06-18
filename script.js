@@ -5,7 +5,7 @@ function setVhUnit() {
 setVhUnit();
 window.addEventListener('resize', setVhUnit);
 
-// 🎯 Chips animadas optimizadas para iOS
+/* 🎯 Chips animadas optimizadas para iOS
 const chipsContainer = document.querySelector(".chips-container");
 const colors = ['#D32F2F', '#9C27B0', '#FFD700', '#030001'];
 
@@ -42,6 +42,7 @@ function createChip() {
 }
 
 setInterval(createChip, 400);
+*/
 // 📱 Lógica de WhatsApp + GA
 document.addEventListener("DOMContentLoaded", () => {
   const whatsappButton = document.getElementById("whatsapp-button");
